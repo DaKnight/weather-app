@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header search-area">
+                <input type="text" name="city" id="city" class="search-input" placeholder="Enter city name" spellcheck="false">
+                <button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="card-body error">
+                <h4>Invalid City Name</h4>
+            </div>
+            <div class="card-body">
+                <img src="./assets/images/clear.png" alt="sunny clear image" width="150" height="150" class="weather-image">
+                <h1 class="temperature">27 °C</h1>
+                <h3 class="city-name">Uttarakhand</h3>
+                <div class="footer-elements">
+                    <div class="left-footer">
+                        <img src="./assets/images/humidity.png" alt="humidity image" class="humidity-image" width="30" height="30">
+                        <div class="humidity-data">
+                            <h5 class="humidity-percentage">10 %</h5>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="right-footer">
+                        <img src="./assets/images/wind.png" alt="wind image" class="wind-image" width="30" height="30">
+                        <div class="wind-data">
+                            <h5 class="wind-speed">30 km/h</h5>
+                            <p>Wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/index.js"></script>
+
+    <script>
+        const apiKey = "be6de3e98971ce673036f3283501120c";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?unit=metric&q=";
+
+        const searchBox = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        const weatherIcon = document.querySelector('.weather-image');
+
+        async function getWeather(city) {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            if(response.status == 404){
+                document.querySelectorAll('.card-body')[1].style.display = 'none';
+                document.querySelector('.error').style.display = 'block';
+                console.log('Error');
+            }
+            else{
+                let data = await response.json();
+                document.querySelector('.city-name').innerHTML = data.name;
+                document.querySelector('.temperature').innerHTML = `${Math.round(data.main.temp)} °C`;
+                document.querySelector('.humidity-percentage').innerHTML = `${data.main.humidity} %`;
+                document.querySelector('.wind-speed').innerHTML = `${data.wind.speed} km/h`;
+
+                switch(data.weather[0].main){
+                    case 'Clear': 
+                                weatherIcon.src = './assets/images/clear.png';
+                                break;
+                            
+                    case 'Clouds':
+                                weatherIcon.src = './assets/images/clouds.png';
+                                break;
+
+                    case 'Rain':
+                                weatherIcon.src = './assets/images/rain.png';
+                                break;
+
+                    case 'Drizzle':
+                                weatherIcon.src = './assets/images/drizzle.png';
+                                break;
+                                
+                    case 'Mist':
+                                weatherIcon.src = './assets/images/mist.png';
+                                break;
+                }
+
+                document.querySelector('.error').style.display = 'none';
+                document.querySelectorAll('.card-body')[1].style.display = 'block';
+            }
+
+        }
+
+        searchBtn.addEventListener('click', ()=>{
+            getWeather(searchBox.value);
+        });
+
+    </script>
+</body>
+</html>

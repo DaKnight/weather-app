@@ -1,0 +1,154 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: darkslategray;
+}
+
+.container{
+    margin-top: 5em;
+}
+
+.card{
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color:#fff;
+    max-width: 470px;
+    border-radius: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+.card-header{
+    background-color: transparent;
+    border: none;
+    margin: 20px auto 20px auto;
+    padding: 0px 30px 0px 30px;
+}
+
+.search-area{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-city{
+    height: 3rem;
+    border: none;
+    border-radius: 20px;
+}
+
+.search-input{
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+    color: #555;
+    border: none;
+    outline: 0; 
+    padding: 10px 25px;
+    background: #ebfffc;
+}
+
+.search-btn{
+    border-radius: 50%;
+    padding: 0.7rem;
+    border: none;
+    outline: 0;
+    background: #ebfffc;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.card-body{
+    margin: 0px auto 40px auto;
+    padding: 0px;
+    display: none;
+}
+
+.error{
+    display: block;
+    color: rgb(39, 10, 10);
+    display: none;
+}
+
+.footer-elements{
+    min-width: 240px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.left-footer{
+    margin-right: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+h5,p{
+    margin: 0px;
+}
+
+.humidity-image, .wind-image{
+    margin-right: 20px;
+    justify-content: center;
+}
+
+.humidity-data, .wind-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+@media(max-width: 425px){
+    .card-header {
+        padding: 0px 15px 0px 15px;
+    }
+    .search-input{
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .search-btn{
+        width: 40px;
+        height: 40px;
+        font-size: 13px;
+    }
+
+    .left-footer {
+        margin-right: 15%;
+    }
+
+    .humidity-image, .wind-image{
+        margin-right: 10px;
+        height: 20px;
+        height: 20px;
+    }
+
+    .humidity-data h5, .wind-data h5{
+        font-size: 14px;
+    }
+
+    .humidity-data p, .wind-data p{
+        font-size: 12px;
+    }
+}
